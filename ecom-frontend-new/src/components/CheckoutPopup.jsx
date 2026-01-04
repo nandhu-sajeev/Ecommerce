@@ -1,10 +1,9 @@
-import axios from 'axios';
+import axios from '../axios';
 import React, { useState } from 'react';
 import { Modal, Button, Form, Alert, Toast, ToastContainer } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 const CheckoutPopup = ({ show, handleClose, cartItems, totalPrice }) => {
-  const baseUrl = import.meta.env.VITE_BASE_URL;
   const navigate = useNavigate();
 
   const [name, setName] = useState('');
@@ -40,7 +39,7 @@ const CheckoutPopup = ({ show, handleClose, cartItems, totalPrice }) => {
     };
 
     try {
-      const response = await axios.post(`${baseUrl}/api/orders/place`, data);
+      const response = await axios.post(`/api/orders/place`, data);
       console.log(response, 'order placed');
 
       // Show success notification
@@ -63,7 +62,7 @@ const CheckoutPopup = ({ show, handleClose, cartItems, totalPrice }) => {
     }
   };
   const convertBase64ToDataURL = (base64String, mimeType = 'image/jpeg') => {
-    if (!base64String) return unplugged; // Return fallback image if no data
+    if (!base64String) return '/fallback-image.jpg'; // Return fallback image if no data
 
     // If it's already a data URL, return as is
     if (base64String.startsWith('data:')) {

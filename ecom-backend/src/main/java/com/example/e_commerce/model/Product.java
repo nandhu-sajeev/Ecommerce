@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -22,7 +22,7 @@ public class Product {
     private String name;
     private String description;
     private String brand;
-    private BigInteger price;
+    private BigDecimal price;
     private String category;
     private Date releaseDate;
     private Boolean productAvailable;

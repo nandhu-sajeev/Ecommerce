@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios from '../axios';
 import React, { useEffect, useState } from 'react';
 
 const Order = () => {
-  const baseUrl = import.meta.env.VITE_BASE_URL;
+  
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,7 +11,7 @@ const Order = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/api/orders`);
+        const response = await axios.get(`/api/orders`);
         setOrders(response.data);
         setLoading(false);
       } catch (error) {
@@ -22,7 +22,7 @@ const Order = () => {
     };
 
     fetchOrders();
-  }, [baseUrl]);
+  }, []);
 
   const toggleOrderDetails = (orderId) => {
     if (expandedOrder === orderId) {
@@ -120,7 +120,7 @@ const Order = () => {
                           <div>{order.customerName}</div>
                           <div className="text-muted small">{order.email}</div>
                         </td>
-                        <td>{new Date(order.orderDate).toLocaleDateString()}</td>
+                        <td>{order.orderDate ? new Date(order.orderDate).toLocaleDateString() : '-'}</td>
                         <td>
                           <span className={`badge ${getStatusClass(order.status)}`}>{order.status}</span>
                         </td>
